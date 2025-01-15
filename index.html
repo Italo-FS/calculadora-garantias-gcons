@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed top-4 right-4 space-y-2 z-50"></div>
+
+  <main class="p-4">
+    <h4 class="text-xl font-bold mb-4">Calculo de Garantias - APOLICES</h4>
+
+    <div class="space-y-4">
+      <section class="p-4 border rounded-lg">
+        <h5 class="text-xl font-bold mb-4">Vingência</h5>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 3xl:grid-cols-12 gap-4">
+          <div class="col-span-1">
+            <label for="start_date" class="block mb-2 text-sm font-medium text-gray-900">Data Inicial</label>
+            <input type="date" id="start_date"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+          </div>
+
+          <div class="col-span-2">
+            <label for="period" class="block mb-2 text-sm font-medium text-gray-900">Vingência</label>
+
+            <div class="inline-flex gap-2 w-full">
+              <input type="number" id="period"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                value="1" min="1" />
+              <select id="period_select"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <option value="months" selected>meses</option>
+                <option value="days">dias</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-span-1">
+            <label for="end_date" class="block mb-2 text-sm font-medium text-gray-900">Data Final</label>
+            <input type="date" id="end_date"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              disabled />
+          </div>
+
+          <div class="col-span-1">
+            <label for="warranty_date" class="block mb-2 text-sm font-medium text-gray-900 truncate">Garantia (90
+              dias)</label>
+            <input type="date" id="warranty_date"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              disabled />
+          </div>
+        </div>
+      </section>
+
+      <section class="p-4 border rounded-lg">
+        <h5 class="text-xl font-bold mb-4">Valor</h5>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 3xl:grid-cols-12 gap-4">
+          <div class="col-span-2">
+            <label for="global_value" class="block mb-2 text-sm font-medium text-gray-900">Valor Global</label>
+            <div class="inline-flex gap-1 w-full">
+              <input type="text" id="global_value" value="R$ 0,00"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+
+              <button type="button" onclick="copyInputValueToClipboard('global_value')"
+                class="py-2 px-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-copy">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-span-1">
+            <label for="coverage_percentage" class="block mb-2 text-sm font-medium text-gray-900">Cobertura</label>
+            <select id="coverage_percentage"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              <option value="10">10%</option>
+              <option value="5" selected>5%</option>
+              <option value="1">1%</option>
+            </select>
+          </div>
+
+          <div class="col-span-2">
+            <label for="coverage_value" class="block mb-2 text-sm font-medium text-gray-900" disabled>Valor</label>
+            <div class="inline-flex gap-1 w-full">
+              <input type="text" id="coverage_value"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                disabled />
+
+              <button type="button" onclick="copyInputValueToClipboard('coverage_value')"
+                class="py-2 px-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-copy">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const startDateInput = document.getElementById('start_date');
+    const periodInput = document.getElementById('period');
+    const periodSelect = document.getElementById('period_select');
+    const endDateInput = document.getElementById('end_date');
+    const warrantyDateInput = document.getElementById('warranty_date');
+
+    function calculateEndDate() {
+      const startDate = new Date(startDateInput.value);
+      const period = parseInt(periodInput.value);
+      let endDate;
+
+      switch (periodSelect.value) {
+        case 'months':
+          endDate = addMonthsToDate(startDate, period);
+          break;
+        case 'days':
+          endDate = addDaysToDate(startDate, period);
+          break;
+        default:
+          throw new Error('Invalid period unit');
+      }
+
+      warrantyDate = addDaysToDate(endDate, 91);
+
+      endDateInput.value = endDate.toISOString().split('T')[0];
+      warrantyDateInput.value = warrantyDate.toISOString().split('T')[0];
+    }
+
+    function addDaysToDate(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days - 1);
+      return result;
+    }
+
+    function addMonthsToDate(date, months) {
+      const result = new Date(date);
+      result.setMonth(result.getMonth() + months);
+      result.setDate(result.getDate() - 1);
+      return result;
+    }
+
+    // ----------------------------------------------------------------------------------------
+
+    const globalValueInput = document.getElementById('global_value');
+    const coveragePercentageSelect = document.getElementById('coverage_percentage');
+    const coverageValueInput = document.getElementById('coverage_value');
+
+    function calculateCoverageValue() {
+      // Remove caracteres não numéricos e substitui vírgula por ponto para parseFloat
+      const rawGlobalValue = globalValueInput.value.replace(/[^\d,]/g, '').replace(',', '.');
+      const globalValue = parseFloat(rawGlobalValue) || 0;
+
+      const coveragePercentage = parseInt(coveragePercentageSelect.value);
+      const coverageValue = globalValue * (coveragePercentage / 100);
+
+      // Formata o valor resultante como moeda brasileira
+      coverageValueInput.value = coverageValue.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      });
+    }
+
+    function extenso(c) {
+      if (typeof c == "number") {
+        c = String(c).replace(",", "");
+        c = c.replace(".", ",");
+      }
+      else if (typeof c != "string") {
+        return "erro"
+      }
+
+      var ex = [
+        ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"],
+        ["dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"],
+        ["cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"],
+        ["mil", "milhão", "bilhão", "trilhão", "quadrilhão", "quintilhão", "sextilhão", "setilhão", "octilhão", "nonilhão", "decilhão", "undecilhão", "dodecilhão", "tredecilhão", "quatrodecilhão", "quindecilhão", "sedecilhão", "septendecilhão", "octencilhão", "nonencilhão"]
+      ];
+      var a, n, v, i, n = c.replace(c ? /[^,\d]/g : /\D/g, "").split(","), e = " e ", $ = "real", d = "centavo", sl;
+
+      for (var f = n.length - 1, l, j = -1, r = [], s = [], t = ""; ++j <= f; s = []) {
+        j && (n[j] = (("." + n[j]) * 1).toFixed(2).slice(2));
+        if (!(a = (v = n[j]).slice((l = v.length) % 3).match(/\d{3}/g), v = l % 3 ? [v.slice(0, l % 3)] : [], v = a ? v.concat(a) : v).length) continue;
+        for (a = -1, l = v.length; ++a < l; t = "") {
+          if (!(i = v[a] * 1)) continue;
+          i % 100 < 20 && (t += ex[0][i % 100]) ||
+            i % 100 + 1 && (t += ex[1][(i % 100 / 10 >> 0) - 1] + (i % 10 ? e + ex[0][i % 10] : ""));
+          s.push((i < 100 ? t : !(i % 100) ? ex[2][i == 100 ? 0 : i / 100 >> 0] : (ex[2][i / 100 >> 0] + e + t)) +
+            ((t = l - a - 2) > -1 ? " " + (i > 1 && t > 0 ? ex[3][t].replace("ão", "ões") : ex[3][t]) : ""));
+        }
+        a = ((sl = s.length) > 1 ? (a = s.pop(), s.join(" ") + e + a) : s.join("") || ((!j && (n[j + 1] * 1 > 0) || r.length) ? "" : ex[0][0]));
+        a && r.push(a + (c ? (" " + (v.join("") * 1 > 1 ? j ? d + "s" : (/0{6,}$/.test(n[0]) ? "de " : "") + $.replace("l", "is") : j ? d : $)) : ""));
+      }
+      return r.join(e);
+    }
+
+    function copyInputValueToClipboard(inputName) {
+      const input = document.getElementById(inputName);
+      const value = input.value;
+      const extense = extenso(value);
+      navigator.clipboard.writeText(extense)
+        .then(() => {
+          showToast('Valor em extenso copiado com sucesso!');
+        })
+        .catch(() => {
+          showToast('Erro ao copiar valor.', false);
+        });
+    }
+
+    // ----------------------------------------------------------------------------------------
+
+    const toastContainer = document.getElementById('toast-container');
+
+    function showToast(message, isSuccess = true) {
+      const toast = document.createElement('div');
+      toast.className = `
+        flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow
+        ${isSuccess ? 'text-green-500' : 'text-red-500'}
+      `;
+
+      const icon = isSuccess
+        ? '<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/></svg>'
+        : '<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1a9 9 0 1 0 9 9A9 9 0 0 0 10 1Zm-1 12a1 1 0 1 1 2 0v2a1 1 0 1 1-2 0Zm0-8a1 1 0 0 1 2 0v4a1 1 0 1 1-2 0Z"/></svg>';
+
+      toast.innerHTML = `
+        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">${icon}</div>
+        <div class="ms-3 text-sm font-normal">${message}</div>
+        <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg p-1.5 hover:bg-gray-100 focus:ring-2 focus:ring-gray-300"
+          onclick="this.parentElement.remove()">
+          <span class="sr-only">Close</span>
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M10 8.586L5.707 4.293a1 1 0 0 0-1.414 1.414L8.586 10l-4.293 4.293a1 1 0 1 0 1.414 1.414L10 11.414l4.293 4.293a1 1 0 0 0 1.414-1.414L11.414 10l4.293-4.293a1 1 0 0 0-1.414-1.414L10 8.586Z"/></svg>
+        </button>
+      `;
+
+      toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+
+    // ----------------------------------------------------------------------------------------
+
+
+    startDateInput.addEventListener('change', calculateEndDate);
+    periodInput.addEventListener('change', calculateEndDate);
+    periodSelect.addEventListener('change', calculateEndDate);
+
+    globalValueInput.addEventListener('change', calculateCoverageValue);
+    coveragePercentageSelect.addEventListener('change', calculateCoverageValue);
+
+    globalValueInput.addEventListener('input', (event) => {
+      let value = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+      value = (parseFloat(value) / 100).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      });
+      if (value === 'NaN' || value === 'R$ NaN') {
+        value = 'R$ 0,00';
+      }
+      event.target.value = value;
+    });
+  </script>
+</body>
+
+</html>
