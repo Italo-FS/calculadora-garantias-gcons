@@ -133,7 +133,7 @@
           throw new Error('Invalid period unit');
       }
 
-      warrantyDate = addDaysToDate(endDate, 91);
+      warrantyDate = addDaysToDate(endDate, 90);
 
       endDateInput.value = endDate.toISOString().split('T')[0];
       warrantyDateInput.value = warrantyDate.toISOString().split('T')[0];
@@ -141,14 +141,13 @@
 
     function addDaysToDate(date, days) {
       const result = new Date(date);
-      result.setDate(result.getDate() + days - 1);
+      result.setDate(result.getDate() + days);
       return result;
     }
 
     function addMonthsToDate(date, months) {
       const result = new Date(date);
       result.setMonth(result.getMonth() + months);
-      result.setDate(result.getDate() - 1);
       return result;
     }
 
